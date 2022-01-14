@@ -1,16 +1,15 @@
 const port =3000;
 const express=require('express');
+
 const app=express();
 
-
+//Setting up view engine
 app.set('view engine','ejs');
 app.set('views','./view');
 
-app.get('/',function(req,res){
-    //res.end('<h1>Hello</h1>')
-    res.render('home');
-    return;
-})
+// Setting up router
+app.use('/',require('./router'));
+
 
 app.listen(port,function(err)
 {
