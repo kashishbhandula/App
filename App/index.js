@@ -2,6 +2,7 @@ const port =3000;
 const { urlencoded } = require('express');
 const express=require('express');
 const expressLayout=require('express-ejs-layouts');
+const db=require('./config/mongoose.ejs');
 
 const app=express();
 
