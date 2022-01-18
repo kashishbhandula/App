@@ -1,0 +1,11 @@
+module.exports.sign_up=function(req,res)
+{
+    res.render('sign_up.ejs');
+    return;
+}
+module.exports.data_collect=function(req,res)
+{
+    console.log("hii");
+    console.log(req.body);
+    res.render('sign_up.ejs');
+}

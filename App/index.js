@@ -1,4 +1,5 @@
 const port =3000;
+const { urlencoded } = require('express');
 const express=require('express');
 const expressLayout=require('express-ejs-layouts');
 
@@ -9,6 +10,8 @@ const app=express();
 app.set('view engine','ejs');
 app.set('views','./view');
 
+//Setting up middleware
+app.use(express.urlencoded());
 //Setting up layout
 app.use(expressLayout);
 
