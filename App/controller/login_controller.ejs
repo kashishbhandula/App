@@ -1,12 +1,39 @@
-const db=const  = require('../model/credentials.ejs');
+const Credential=require('../model/credentials.ejs');
 module.exports.sign_up=function(req,res)
 {
     res.render('sign_up.ejs');
     return;
-}
+};
 module.exports.data_collect=function(req,res)
 {
-    console.log("hii");
-    console.log(req.body);
-    res.render('sign_up.ejs');
-}
+    
+    ///console.log(req.body);
+    if(req.body.password!=req.body.confirm_password)
+    {
+        console.log("Password and Confirm-Password are different");
+        res.render('back');
+
+    }
+    else
+    {
+       Credential.findOne({email:req.body.email},function(err,user){
+           if(err){console.log("Error in checking wether the email is present or not");return;}
+           if(!user)
+           {
+               Credential.create(req.body,function(err,user){
+                   if(err){console.log("Error in creating entry into database");return;}
+                   console.log("data in stored in the database");
+                   res.render('sign_in.ejs');
+
+               });
+           }
+           else
+           {
+            console.log("Account already present");
+            res.render('sign_in.ejs');
+           }
+       });
+
+    }
+    
+};
