@@ -12,6 +12,13 @@ app.set('views','./view');
 //Setting up layout
 app.use(expressLayout);
 
+//Using static files
+app.use(express.static('./asset'));
+
+// 
+app.set('layout extraStyles', true);
+app.set('layout extraScripts', true);
+
 // Setting up router
 app.use('/',require('./router'));
 
