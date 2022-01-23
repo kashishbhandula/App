@@ -4,6 +4,11 @@ module.exports.sign_up=function(req,res)
     res.render('sign_up.ejs');
     return;
 };
+module.exports.sign_in=function(req,res)
+{
+    res.render('sign_in.ejs');
+    return;
+};
 module.exports.data_collect=function(req,res)
 {
     
@@ -11,7 +16,7 @@ module.exports.data_collect=function(req,res)
     if(req.body.password!=req.body.confirm_password)
     {
         console.log("Password and Confirm-Password are different");
-        res.render('back');
+        res.redirect('back');
 
     }
     else
@@ -22,18 +27,61 @@ module.exports.data_collect=function(req,res)
            {
                Credential.create(req.body,function(err,user){
                    if(err){console.log("Error in creating entry into database");return;}
-                   console.log("data in stored in the database");
-                   res.render('sign_in.ejs');
+                   console.log("data is stored in the database");
+                   res.redirect('/sign_in');
 
                });
            }
            else
            {
             console.log("Account already present");
-            res.render('sign_in.ejs');
+            res.redirect('/sign_in');
            }
        });
 
     }
     
+};
+module.exports.createSession=function(req,res){
+    //step to authentication
+    console.log("Authentication started");
+
+    //find the user
+    Credential.findOne({email:req.body.email},function(err,user)
+    {
+        if(err){console.log('error in finding uer signingnin');return;}
+        // handle user found
+        if(user)
+        {
+            // handle password which do not match
+            if(user.password!=req.body.password)
+            {
+                console.log(user.password+" "+req.body.password);
+                return res.redirect('sign_in');
+            }
+            else
+            {
+                // handle session creation
+                
+                req.cookie('user_id',user._id);
+                res.render('home');
+            }
+           
+            
+
+        }
+        else
+        {
+            // handle user no found
+            console.log('hello');
+            res.redirect('back');
+        
+        }
+    })
+
+   
+
+    
+    
+
 };
