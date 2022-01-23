@@ -15,8 +15,31 @@ passport.use(new LocalStrategy(
                 console.log("error in finding the passport");
                 return done(err);
             }
+            if(!user||user.password!=password)
+            {
+                console.log('Invalid user name password');
+                return done(null,false);
+            }
+            return done(null,user);
         })
 
     }
 
 });
+//////////////serialize the user to decide which key to be kept in key
+passport.serializeUser(user,done))
+{
+    done(null,user.id);
+};
+passport.deserializeUser(id,done)
+{
+    User.findbById(id,function(err,user{
+        if(err)
+        {
+            console.log("error in finding the user");
+            return done(err);
+        }
+        return done(null,user);
+    }));
+};
+module.exports=passport;
