@@ -1,6 +1,8 @@
 module.exports.home=function(req,res){
 
     console.log("Home controller is working fine");
+    console.log(req.cookies);
+    res.cookie('hello',25);
     res.render('home');
     return;
 };

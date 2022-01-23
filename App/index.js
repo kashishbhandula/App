@@ -3,6 +3,7 @@ const { urlencoded } = require('express');
 const express=require('express');
 const expressLayout=require('express-ejs-layouts');
 const db=require('./config/mongoose.ejs');
+const cookieParser=require('cookie-parser');
 
 const app=express();
 
@@ -13,6 +14,8 @@ app.set('views','./view');
 
 //Setting up middleware
 app.use(express.urlencoded());
+//Setting up cookie Parser
+app.use(cookieParser());
 //Setting up layout
 app.use(expressLayout);
 
