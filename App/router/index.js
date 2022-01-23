@@ -9,6 +9,7 @@ router.get('/sign_up',login_controller.sign_up);
 router.post('/create_profile',login_controller.data_collect);
 router.get('/sign_in',login_controller.sign_in);
 router.post('/create_session',login_controller.createSession);
+router.get('/profile',login_controller.profile);
 
 
 

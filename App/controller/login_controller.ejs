@@ -9,6 +9,11 @@ module.exports.sign_in=function(req,res)
     res.render('sign_in.ejs');
     return;
 };
+module.exports.profile=function(req,res)
+{
+    res.render('profile');
+    return;
+};
 module.exports.data_collect=function(req,res)
 {
     
@@ -63,8 +68,8 @@ module.exports.createSession=function(req,res){
             {
                 // handle session creation
                 
-                req.cookie('user_id',user._id);
-                res.render('home');
+                req.cookies.user_id=user.id;//documentation changed
+                res.redirect('/profile');
             }
            
             
