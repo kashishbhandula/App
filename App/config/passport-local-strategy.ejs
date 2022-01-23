@@ -1,0 +1,22 @@
+const passport=require('passport');
+const LocalStrategy=req('passport-local').Strategy;
+const Credential=require('../model/credentials.ejs'); 
+// authentication using passport
+passport.use(new LocalStrategy(
+{
+    usernameField:'email'
+},
+{
+    function(email,password,done){
+        //finding a user and establish the identity
+        Credential.findOne({email:email},function(err,use){
+            if(err)
+            {
+                console.log("error in finding the passport");
+                return done(err);
+            }
+        })
+
+    }
+
+});
