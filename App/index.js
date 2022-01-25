@@ -4,14 +4,31 @@ const express=require('express');
 const expressLayout=require('express-ejs-layouts');
 const db=require('./config/mongoose.ejs');
 const cookieParser=require('cookie-parser');
+const session=require('express-session');
+const passport=require('passport');
+const passportLocal=require('./config/passport-local-strategy.ejs');
 
 const app=express();
 
 
-//Setting up view engine
+//Setting up view engines
 app.set('view engine','ejs');
 app.set('views','./view');
 
+//Setting up express session
+app.use(session({
+
+    name:'App',
+    secret:'something',//change before deployment
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:1000 * 60 * 100
+
+    }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 //Setting up middleware
 app.use(express.urlencoded());
 //Setting up cookie Parser
