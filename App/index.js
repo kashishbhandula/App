@@ -7,6 +7,8 @@ const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy.ejs');
+const MongoStore=require('connect-mongo');
+
 
 const app=express();
 
@@ -14,6 +16,7 @@ const app=express();
 //Setting up view engines
 app.set('view engine','ejs');
 app.set('views','./view');
+
 
 //Setting up express session
 app.use(session({
@@ -25,7 +28,17 @@ app.use(session({
     cookie:{
         maxAge:1000 * 60 * 100
 
+    },
+    store:new MongoStore({
+        mongoUrl: 'mongodb://localhost/App',
+        mongooseConnection:db,
+        autoRemove:'disabled'
+
+    }),
+    function(err){
+        console.log(err||"Connect MonoDB setup");
     }
+
 }));
 app.use(passport.initialize());
 app.use(passport.session());
