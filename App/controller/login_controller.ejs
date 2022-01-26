@@ -1,12 +1,25 @@
 const Credential=require('../model/credentials.ejs');
 module.exports.sign_up=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/profile');
+    }
     res.render('sign_up');
     return;
 };
 module.exports.sign_in=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/profile');
+    }
     res.render('sign_in');
+    return;
+};
+module.exports.profile=function(req,res)
+{
+    res.render('profile');
     return;
 };
 module.exports.data_collect=function(req,res)
@@ -44,7 +57,8 @@ module.exports.data_collect=function(req,res)
 };
 module.exports.createSession=function(req,res)
 {
-    console.log(res);
-    res.redirect('/');
+    //console.log(res);
+    res.redirect('/profile');
     return;
 }
+
