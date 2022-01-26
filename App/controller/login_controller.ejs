@@ -17,6 +17,12 @@ module.exports.sign_in=function(req,res)
     res.render('sign_in');
     return;
 };
+module.exports.sign_out=function(req,res)
+{
+    req.logout();
+    res.redirect('/');
+    return;
+};
 module.exports.profile=function(req,res)
 {
     res.render('profile');

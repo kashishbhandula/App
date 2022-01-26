@@ -7,6 +7,7 @@ console.log("router is working fine");
 
 router.get('/',home_controller.home);
 router.get('/sign_up',login_controller.sign_up);
+router.get('/sign_out',login_controller.sign_out);
 router.get('/sign_in',login_controller.sign_in);
 router.get('/profile',passport.checkAuthentication,login_controller.profile);
 router.post('/create_profile',login_controller.data_collect);
