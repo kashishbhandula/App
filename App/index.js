@@ -8,10 +8,10 @@ const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy.ejs');
 const MongoStore=require('connect-mongo');
+var sassMiddleware=require('node-sass-middleware');
 
 
 const app=express();
-
 
 //Setting up view engines
 app.set('view engine','ejs');
@@ -58,6 +58,14 @@ app.use(express.static('./asset'));
 app.set('layout extraStyles', true);
 app.set('layout extraScripts', true);
 
+//settimg up Sass middleware
+app.use(sassMiddleware({
+    src:'./asset/scss',
+    dest:'./asset/css',
+    debug:true,
+    outputStyle:'extended',
+    prefix:'/css'
+}));
 // Setting up router
 app.use('/',require('./router'));
 
