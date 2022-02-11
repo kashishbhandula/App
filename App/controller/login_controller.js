@@ -1,4 +1,4 @@
-const Credential=require('../model/credentials.ejs');
+const Credential=require('../model/credentials.js');
 module.exports.sign_up=function(req,res)
 {
     if(req.isAuthenticated())

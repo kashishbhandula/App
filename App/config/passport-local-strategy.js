@@ -1,6 +1,6 @@
 const passport=require('passport');
 const LocalStrategy=require('passport-local').Strategy;
-const Credential=require('../model/credentials.ejs'); 
+const Credential=require('../model/credentials.js'); 
 // authentication using passport
 passport.use(new LocalStrategy(
 {

@@ -1,3 +1,39 @@
 <link rel="stylesheet" href="/css/home.css">
 <h1><a href="sign_in">Sign In</a></h1>
 <h1><a href="sign_up">Sign Up</a></h1>
+<h1><a href="sign_out">Sign out</a></h1>
+
+<section id="feed-posts">
+    <h4>Posts</h4>
+    <%if(locals.user){%>
+        <form action="/post/create" id="new-post-form" method="POST">
+            <textarea name="content" id="" cols="30" rows="10"></textarea>
+            <input type="submit" value="Post">
+        </form>
+        <%}%>
+            <div id="post-list">
+                <ul>
+
+                    <%for (post of posts){%>
+                        <p>
+                            <li>
+                                <%=post.user%>
+                                    <%=post.content%>
+                            </li>
+                        </p>
+                        <div class="post-comments">
+                            <%if(locals.user){ %>
+                                <form action="/comments/create" method="post">
+                                    <input type="text" name="content" placeholder="Type here toadd the comment">
+                                    <input type="text" name="post" value="<%=post._id%>">
+                                    <input type="submit" value="Add Comment">
+                                </form>
+
+
+                                <%}%>
+                        </div>
+                    <%}%>
+
+                </ul>
+            </div>
+</section>

@@ -1,12 +1,12 @@
-const port =3000;
+const port =4000;
 const { urlencoded } = require('express');
 const express=require('express');
 const expressLayout=require('express-ejs-layouts');
-const db=require('./config/mongoose.ejs');
+const db=require('./config/mongoose.js');
 const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const passport=require('passport');
-const passportLocal=require('./config/passport-local-strategy.ejs');
+const passportLocal=require('./config/passport-local-strategy.js');
 const MongoStore=require('connect-mongo');
 var sassMiddleware=require('node-sass-middleware');
 

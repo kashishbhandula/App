@@ -1,8 +1,8 @@
 const express=require('express');
 const router=express.Router();
 const passport=require('passport');
-const home_controller=require('../controller/home_controller.ejs');
-const login_controller=require('../controller/login_controller.ejs');
+const home_controller=require('../controller/home_controller.js');
+const login_controller=require('../controller/login_controller.js');
 console.log("router is working fine");
 
 router.get('/',home_controller.home);
@@ -13,6 +13,8 @@ router.get('/profile',passport.checkAuthentication,login_controller.profile);
 router.post('/create_profile',login_controller.data_collect);
 //use passport as middleware to authenticate
 router.post('/create_session',passport.authenticate('local',{failureRedirect:'/sign_in'}),login_controller.createSession);
+router.use('/post',require('./post.js'));
+router.use('/comments',require('./comments.js'));
 
 
 
